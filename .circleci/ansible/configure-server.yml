@@ -38,3 +38,4 @@
         delay: 10
   roles: 
    - configure-server
+   - configure-prometheus-node-exporter 
