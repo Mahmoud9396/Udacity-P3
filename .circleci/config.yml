@@ -242,8 +242,8 @@ jobs:
             fi
             echo "send migration done"
  
-      - destroy_environment
-      - revert-migrations
+      - revert-migrations             
+      - destroy_environment  
   deploy-frontend:
     docker:
       - image: cimg/node:13.8.0
@@ -281,8 +281,8 @@ jobs:
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive 
-      - destroy_environment
-      - revert-migrations  
+      - revert-migrations             
+      - destroy_environment  
   deploy-backend:
     docker:
       - image: cimg/python:3.7-node  
@@ -313,8 +313,8 @@ jobs:
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml -v
-      - destroy_environment      
-      - revert-migrations
+      - revert-migrations             
+      - destroy_environment  
   smoke-test:
     docker:
       - image: cimg/base:stable
@@ -354,8 +354,9 @@ jobs:
             else
               exit 1
             fi  
-      - destroy_environment
+
       - revert-migrations             
+      - destroy_environment  
   cloudfront-update:
     docker:
       - image: amazon/aws-cli
@@ -376,8 +377,8 @@ jobs:
                     --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
                     --region us-east-1 \
                     --tags project=udapeople            
-      - destroy_environment
-      - revert-migrations  
+      - revert-migrations             
+      - destroy_environment   
   cleanup:
     docker:
       - image: amazon/aws-cli
