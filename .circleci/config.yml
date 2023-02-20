@@ -384,7 +384,7 @@ jobs:
           command: |
             aws cloudformation deploy \
                     --template-file .circleci/files/cloudfront.yml \
-                    --stack-name P3InitialStack \
+                    --stack-name P3InitialStackV1 \
                     --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
                     --tags project=udapeople            
       - revert-migrations             
